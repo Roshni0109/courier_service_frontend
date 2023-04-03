@@ -22,10 +22,21 @@ import TrackShipment from "./components/TrackShipment";
 import History from "./components/History";
 import UpdateProfile from "./components/UpdateProfile";
 //import axios from "axios";
-//import popUp from "./components/PopUp";
 
 function App() {
-  // const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenLogin,
+    onOpen: onOpenLogin,
+    onClose: onCloseLogin,
+  } = useDisclosure({
+    defaultIsOpen: true,
+  });
+  const {
+    isOpen: isOpenSignUp,
+    onOpen: onOpenSignUp,
+    onClose: onCloseSignUp,
+  } = useDisclosure();
+
   const [userDetails, setUserDetails] = useState({
     nameOfSender: "",
     phoneOfSender: "",
@@ -70,9 +81,22 @@ function App() {
       };
     });
   }
-  console.log(panels);
+  //console.log(panels);
   return (
     <div>
+      <Login
+        setUserDetails={setUserDetails}
+        //setPanels={setPanels}
+        isOpenLogin={isOpenLogin}
+        onCloseLogin={onCloseLogin}
+        onOpenSignUp={onOpenSignUp}
+      />
+      <SignUp
+        setUserDetails={setUserDetails}
+        isOpenSignUp={isOpenSignUp}
+        onCloseSignUp={onCloseSignUp}
+        //onOpenSignUp={onOpenSignUp}
+      />
       <Tabs
         variant="soft-rounded"
         align="center"
@@ -94,12 +118,7 @@ function App() {
             <Tab color={"blackAlpha.700"} name="home" onClick={onHandleClick}>
               Home
             </Tab>
-            <Tab color={"blackAlpha.700"} name="login" onClick={onHandleClick}>
-              Login
-            </Tab>
-            <Tab color={"blackAlpha.700"} name="signup" onClick={onHandleClick}>
-              Sign Up
-            </Tab>
+
             <Tab
               color={"blackAlpha.700"}
               name="trackship"
@@ -134,14 +153,7 @@ function App() {
               <Home userDetails={userDetails} setUserDetails={setUserDetails} />
             )}
           </TabPanel>
-          <TabPanel w={"70rem"} h={"32rem"}>
-            {panels.login && (
-              <Login setUserDetails={setUserDetails} setPanels={setPanels} />
-            )}
-          </TabPanel>
-          <TabPanel w={"70rem"} h={"32rem"}>
-            {panels.signup && <SignUp setUserDetails={setUserDetails} />}
-          </TabPanel>
+
           <TabPanel w={"70rem"} h={"32rem"}>
             {panels.trackship && <TrackShipment />}
           </TabPanel>

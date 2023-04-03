@@ -56,20 +56,12 @@ export default function History({ userDetails }) {
             width="50%"
             htmlFor=""
           >
-            <HStack>
-              <Flex width={"100%"}>
-                <FormLabel width={"60"} htmlFor="">
-                  Order ID:
-                </FormLabel>
-                <Text sx={{ width: "100%" }}>{orderDetail.orderID}</Text>
-              </Flex>
-              <Flex width={"100%"}>
-                <FormLabel width={"60"} htmlFor="">
-                  Status
-                </FormLabel>
-                <Text sx={{ width: "100%" }}>{orderDetail.status}</Text>
-              </Flex>
-            </HStack>
+            <Flex width={"100%"}>
+              <FormLabel width={"60"} htmlFor="">
+                Order ID:
+              </FormLabel>
+              <Text sx={{ width: "100%" }}>{orderDetail.orderID}</Text>
+            </Flex>
 
             <Flex width={"100%"}>
               <FormLabel width={"60"} htmlFor="">
@@ -103,7 +95,7 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 From:
               </FormLabel>
-              <Text sx={{ width: "100%" }}>{orderDetail.cityOfSender}</Text>
+              <Text sx={{ width: "100%" }}>{orderDetail.addressOfSender}</Text>
             </Flex>
 
             <Flex width={"100%"}>
@@ -120,6 +112,12 @@ export default function History({ userDetails }) {
             alignContent={"stretch"}
             width="50%"
           >
+            <Flex width={"100%"}>
+              <FormLabel width={"60"} htmlFor="">
+                Status
+              </FormLabel>
+              <Text sx={{ width: "100%" }}>{orderDetail.status}</Text>
+            </Flex>
             <Flex width={"100%"}>
               <FormLabel width={"60"} htmlFor="">
                 Name of Receiver:
@@ -152,7 +150,9 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 To:
               </FormLabel>
-              <Text sx={{ width: "100%" }}>{orderDetail.cityOfReceiver}</Text>
+              <Text sx={{ width: "100%" }}>
+                {orderDetail.addressOfReceiver}
+              </Text>
             </Flex>
 
             <Flex width={"100%"}>

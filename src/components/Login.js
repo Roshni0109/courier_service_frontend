@@ -11,6 +11,9 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Modal,
+  ModalContent,
+  ModalOverlay,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -19,7 +22,13 @@ import { motion } from "framer-motion";
 import Lottie from "react-lottie";
 import axios from "axios";
 
-export default function Login({ setUserDetails, setPanels }) {
+export default function Login({
+  setUserDetails,
+  //setPanels,
+  onCloseLogin,
+  isOpenLogin,
+  onOpenSignUp,
+}) {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const [creds, setCreds] = useState({ email: "", password: "" });
@@ -36,14 +45,10 @@ export default function Login({ setUserDetails, setPanels }) {
     });
   }
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: require("./lottiefiles/MOGRAPH.json"),
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+  function onClickSignUp() {
+    onCloseLogin();
+    onOpenSignUp();
+  }
 
   async function onClickLoginIn() {
     try {
@@ -57,7 +62,7 @@ export default function Login({ setUserDetails, setPanels }) {
         duration: 4000,
         isClosable: true,
       });
-      console.log(res);
+      // console.log(res);
       //console.log(...res);
       setUserDetails((prevDetails) => {
         return {
@@ -66,14 +71,16 @@ export default function Login({ setUserDetails, setPanels }) {
         };
       });
 
-      setPanels({
+      /* setPanels({
         home: true,
         login: false,
         signup: false,
         trackship: false,
         prevorder: false,
         updateprofile: false,
-      });
+      });*/
+
+      onCloseLogin();
     } catch (err) {
       //console.log(err);
       toast({
@@ -88,85 +95,88 @@ export default function Login({ setUserDetails, setPanels }) {
   //console.log(creds);
 
   return (
-    <Box
-      borderRadius={"xl"}
-      w="100%"
-      h="100%"
-      p={"30"}
-      bg="lavenderblush"
-      borderColor="black"
-      borderWidth={"2px"}
-    >
-      <FormControl>
-        <HStack>
-          <VStack width={"50%"}>
-            <Flex alignSelf={"flex-start"}>
-              <FormLabel htmlFor="email">Email address/Phone Number</FormLabel>
-            </Flex>
-            <Flex alignSelf={"flex-start"}>
-              <Input
-                width={"80"}
-                type="email"
-                borderColor={"black"}
-                name="email"
-                id="email"
-                onChange={onChangeCreds}
-                value={creds["email"]}
-              />
-            </Flex>
-
-            <Flex alignSelf={"flex-start"}>
-              <FormLabel mt="6" htmlFor="password">
-                Password
-              </FormLabel>
-            </Flex>
-
-            <Flex alignSelf={"flex-start"}>
-              <InputGroup width={"80"}>
-                <Input
-                  pr="3.5rem"
-                  type={show ? "text" : "password"}
-                  placeholder="Enter password"
-                  variant="outline"
-                  borderColor={"black"}
-                  width={"80"}
-                  name="password"
-                  onChange={onChangeCreds}
-                  value={creds["password"]}
-                  id="password"
-                />
-                <InputRightElement width="2.5rem">
-                  <IconButton
-                    h="1.75rem"
-                    size="sm"
-                    onClick={handleClick}
-                    icon={show ? <FaEyeSlash /> : <FaEye />}
+    <Modal isOpen={isOpenLogin} isCentered={true}>
+      <ModalOverlay />
+      <ModalContent>
+        <Box
+          borderRadius={"xl"}
+          w="100%"
+          h="100%"
+          p={"30"}
+          bg="lavenderblush"
+          borderColor="black"
+          borderWidth={"2px"}
+        >
+          <FormControl>
+            <HStack>
+              <VStack width={"50%"}>
+                <Flex alignSelf={"flex-start"}>
+                  <FormLabel htmlFor="email">
+                    Email address/Phone Number
+                  </FormLabel>
+                </Flex>
+                <Flex alignSelf={"flex-start"}>
+                  <Input
+                    width={"80"}
+                    type="email"
+                    borderColor={"black"}
+                    name="email"
+                    id="email"
+                    onChange={onChangeCreds}
+                    value={creds["email"]}
                   />
-                </InputRightElement>
-              </InputGroup>
-            </Flex>
+                </Flex>
 
-            <br />
+                <Flex alignSelf={"flex-start"}>
+                  <FormLabel mt="6" htmlFor="password">
+                    Password
+                  </FormLabel>
+                </Flex>
 
-            <ButtonGroup p={4} variant="solid" spacing="6" mt={6}>
-              <motion.div whileHover={{ scale: 1.2 }}>
-                <Button onClick={onClickLoginIn} colorScheme={"blue"}>
-                  Login
-                </Button>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.2 }}>
-                <Button colorScheme={"blue"}>Cancel</Button>
-              </motion.div>
-            </ButtonGroup>
-          </VStack>
+                <Flex alignSelf={"flex-start"}>
+                  <InputGroup width={"80"}>
+                    <Input
+                      pr="3.5rem"
+                      type={show ? "text" : "password"}
+                      placeholder="Enter password"
+                      variant="outline"
+                      borderColor={"black"}
+                      width={"80"}
+                      name="password"
+                      onChange={onChangeCreds}
+                      value={creds["password"]}
+                      id="password"
+                    />
+                    <InputRightElement width="2.5rem">
+                      <IconButton
+                        h="1.75rem"
+                        size="sm"
+                        onClick={handleClick}
+                        icon={show ? <FaEyeSlash /> : <FaEye />}
+                      />
+                    </InputRightElement>
+                  </InputGroup>
+                </Flex>
 
-          <Lottie
-            options={defaultOptions}
-            height={"25rem"}
-            isClickToPauseDisabled="true"
-          />
-        </HStack>
-      </FormControl>
-    </Box>
+                <br />
+
+                <ButtonGroup p={4} variant="solid" spacing="6" mt={6}>
+                  <motion.div whileHover={{ scale: 1.2 }}>
+                    <Button onClick={onClickLoginIn} colorScheme={"blue"}>
+                      Login
+                    </Button>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.2 }}>
+                    <Button onClick={onClickSignUp} colorScheme={"blue"}>
+                      Sign up
+                    </Button>
+                  </motion.div>
+                </ButtonGroup>
+              </VStack>
+            </HStack>
+          </FormControl>
+        </Box>
+      </ModalContent>
+    </Modal>
   );
 }
