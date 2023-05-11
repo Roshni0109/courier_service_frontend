@@ -11,6 +11,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Stack,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -38,6 +39,7 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
   const handleClickPass = () => setShowPass(!showPass);
   const handleClickConfPass = () => setShowConfPass(!showConfPass);
   const toast = useToast();
+  const inputBreakpoint = { xl: "sm", "2xl": "md" };
 
   function onChangeCredentials(e) {
     const name = e.target.name;
@@ -114,8 +116,12 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
       borderWidth={"2px"}
     >
       <FormControl h="100%">
-        <HStack spacing={6}>
-          <VStack alignItems={"stretch"} spacing={6}>
+        <Stack spacing={6} direction={{ base: "column", lg: "row" }}>
+          <VStack
+            alignItems={"stretch"}
+            spacing={6}
+            width={{ base: "100%", xl: "50%" }}
+          >
             <HStack>
               <FormLabel width={80} htmlFor="name">
                 Name:
@@ -127,6 +133,8 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                 id="name"
                 onChange={onChangeCredentials}
                 value={credentials["nameOfSender"]}
+                size={{ inputBreakpoint }}
+                p={"1"}
               />
             </HStack>
 
@@ -141,6 +149,8 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                 id="state"
                 onChange={onChangeCredentials}
                 value={credentials["stateOfSender"]}
+                size={{ inputBreakpoint }}
+                p={"1"}
               />
             </HStack>
 
@@ -157,6 +167,8 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                   id="currentpassword"
                   onChange={onChangeIdentity}
                   value={identity["currentpassword"]}
+                  size={{ inputBreakpoint }}
+                  p={"1"}
                 />
                 <InputRightElement>
                   <IconButton
@@ -173,7 +185,7 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
               <FormLabel width={80} htmlFor="password">
                 New Password:
               </FormLabel>
-              <InputGroup p="0" m="0">
+              <InputGroup size={{ inputBreakpoint }} p="0" m="0">
                 <Input
                   type={showPass ? "text" : "password"}
                   variant="outline"
@@ -182,11 +194,13 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                   id="password"
                   onChange={onChangeIdentity}
                   value={identity["password"]}
+                  //  size={{ inputBreakpoint }}
+                  p={"1"}
                 />
                 <InputRightElement>
                   <IconButton
                     h="1.75rem"
-                    size="sm"
+                    size="xs"
                     onClick={handleClickPass}
                     icon={showPass ? <FaEyeSlash /> : <FaEye />}
                   />
@@ -207,6 +221,8 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                 id="phoneNo"
                 onChange={onChangeCredentials}
                 value={credentials["phoneOfSender"]}
+                size={{ inputBreakpoint }}
+                p={"1"}
               />
             </HStack>
 
@@ -221,6 +237,8 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                 id="city"
                 onChange={onChangeCredentials}
                 value={credentials["cityOfSender"]}
+                size={{ inputBreakpoint }}
+                p={"1"}
               />
             </HStack>
 
@@ -235,6 +253,8 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                 id="pincode"
                 onChange={onChangeCredentials}
                 value={credentials["pincodeOfSender"]}
+                size={{ inputBreakpoint }}
+                p={"1"}
               />
             </HStack>
 
@@ -251,6 +271,8 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                   id="confPassword"
                   onChange={onChangeIdentity}
                   value={identity["confPassword"]}
+                  size={{ inputBreakpoint }}
+                  p={"1"}
                 />
                 <InputRightElement>
                   <IconButton
@@ -262,7 +284,7 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
               </InputGroup>
             </HStack>
           </VStack>
-        </HStack>
+        </Stack>
         <HStack mt={6}>
           <FormLabel width={80} htmlFor="address">
             Address:
@@ -274,10 +296,12 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
             id="address"
             onChange={onChangeCredentials}
             value={credentials["addressOfSender"]}
+            size={{ inputBreakpoint }}
+            p={"1"}
           />
         </HStack>
 
-        <ButtonGroup p={4} variant="solid" mt={"5%"}>
+        <ButtonGroup p={4} variant="solid" mt={"4"}>
           <motion.div whileHover={{ scale: 1.2 }}>
             <Button onClick={onClickUpdate} colorScheme="blue">
               Update

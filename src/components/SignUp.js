@@ -16,6 +16,10 @@ import {
   ModalOverlay,
   useToast,
   VStack,
+  Text,
+  Link,
+  Center,
+  Stack,
 } from "@chakra-ui/react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -24,6 +28,8 @@ export default function SignUp({
   setUserDetails,
   isOpenSignUp,
   onCloseSignUp,
+  onOpenLogin,
+  userName,
 }) {
   const [showPass, setShowPass] = useState(false);
   const [showConfPass, setShowConfPass] = useState(false);
@@ -44,6 +50,7 @@ export default function SignUp({
   const handleClickPass = () => setShowPass(!showPass);
   const handleClickConfPass = () => setShowConfPass(!showConfPass);
   const toast = useToast();
+  const inputBreakpoint = { xl: "sm", "2xl": "md" };
 
   function onChangeCredentials(e) {
     const name = e.target.name;
@@ -88,8 +95,9 @@ export default function SignUp({
           duration: 4000,
           isClosable: true,
         });
+        userName.current = res.data.nameOfSender;
 
-        //onCloseSignUp();
+        onCloseSignUp();
       } catch (err) {
         //console.log(err);
         let statement;
@@ -118,9 +126,16 @@ export default function SignUp({
     }
   }
   // console.log(credentials);
-
+  function onClickLogin() {
+    onCloseSignUp();
+    onOpenLogin();
+  }
   return (
-    <Modal isOpen={isOpenSignUp} isCentered={true} size={"5xl"}>
+    <Modal
+      isOpen={isOpenSignUp}
+      isCentered={true}
+      size={{ base: "lg", lg: "5xl" }}
+    >
       <ModalOverlay />
       <ModalContent>
         <Box
@@ -133,8 +148,12 @@ export default function SignUp({
           borderWidth={"2px"}
         >
           <FormControl h="100%">
-            <HStack spacing={6}>
-              <VStack alignItems={"stretch"} spacing={6}>
+            <Stack spacing={6} direction={{ base: "column", lg: "row" }}>
+              <VStack
+                alignItems={"stretch"}
+                spacing={6}
+                width={{ base: "100%", xl: "50%" }}
+              >
                 <HStack>
                   <FormLabel width={80} htmlFor="name">
                     Name:
@@ -146,6 +165,7 @@ export default function SignUp({
                     id="name"
                     onChange={onChangeCredentials}
                     value={credentials["nameOfSender"]}
+                    size={inputBreakpoint}
                   />
                 </HStack>
 
@@ -160,6 +180,7 @@ export default function SignUp({
                     id="state"
                     onChange={onChangeCredentials}
                     value={credentials["stateOfSender"]}
+                    size={inputBreakpoint}
                   />
                 </HStack>
 
@@ -174,6 +195,7 @@ export default function SignUp({
                     id="email"
                     onChange={onChangeCredentials}
                     value={credentials["email"]}
+                    size={inputBreakpoint}
                   />
                 </HStack>
 
@@ -181,7 +203,7 @@ export default function SignUp({
                   <FormLabel width={80} htmlFor="password">
                     Password:
                   </FormLabel>
-                  <InputGroup p="0" m="0">
+                  <InputGroup p="0" m="0" size={inputBreakpoint}>
                     <Input
                       type={showPass ? "text" : "password"}
                       variant="outline"
@@ -191,10 +213,9 @@ export default function SignUp({
                       onChange={onChangeIdentity}
                       value={identity["password"]}
                     />
-                    <InputRightElement>
+                    <InputRightElement height={"100%"} width={"2.5rem"}>
                       <IconButton
-                        h="1.75rem"
-                        size="sm"
+                        size={{ base: "xs", "2xl": "sm" }}
                         onClick={handleClickPass}
                         icon={showPass ? <FaEyeSlash /> : <FaEye />}
                       />
@@ -215,6 +236,7 @@ export default function SignUp({
                     id="phoneNo"
                     onChange={onChangeCredentials}
                     value={credentials["phoneOfSender"]}
+                    size={inputBreakpoint}
                   />
                 </HStack>
 
@@ -229,6 +251,7 @@ export default function SignUp({
                     id="city"
                     onChange={onChangeCredentials}
                     value={credentials["cityOfSender"]}
+                    size={inputBreakpoint}
                   />
                 </HStack>
 
@@ -243,6 +266,7 @@ export default function SignUp({
                     id="pincode"
                     onChange={onChangeCredentials}
                     value={credentials["pincodeOfSender"]}
+                    size={inputBreakpoint}
                   />
                 </HStack>
 
@@ -259,6 +283,7 @@ export default function SignUp({
                       id="confPassword"
                       onChange={onChangeIdentity}
                       value={identity["confPassword"]}
+                      size={inputBreakpoint}
                     />
                     <InputRightElement>
                       <IconButton
@@ -270,7 +295,7 @@ export default function SignUp({
                   </InputGroup>
                 </HStack>
               </VStack>
-            </HStack>
+            </Stack>
             <HStack mt={6}>
               <FormLabel width={80} htmlFor="address">
                 Address:
@@ -282,20 +307,27 @@ export default function SignUp({
                 id="address"
                 onChange={onChangeCredentials}
                 value={credentials["addressOfSender"]}
+                size={inputBreakpoint}
               />
             </HStack>
-
-            <ButtonGroup p={4} variant="solid" mt={"5%"}>
-              <motion.div whileHover={{ scale: 1.2 }}>
-                <Button onClick={onClickSignUp} colorScheme="blue">
-                  Sign Up
-                </Button>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.2 }}>
-                <Button colorScheme="blue">Cancel</Button>
-              </motion.div>
-            </ButtonGroup>
+            <Center>
+              <ButtonGroup p={4} variant="solid" mt={"5%"}>
+                <motion.div whileHover={{ scale: 1.2 }}>
+                  <Button onClick={onClickSignUp} colorScheme="blue">
+                    Sign Up
+                  </Button>
+                </motion.div>
+              </ButtonGroup>
+            </Center>
           </FormControl>
+          <Center>
+            <Text>
+              Already Have An Account?{" "}
+              <Link color={"blue"} onClick={onClickLogin}>
+                Login
+              </Link>
+            </Text>
+          </Center>
         </Box>
       </ModalContent>
     </Modal>

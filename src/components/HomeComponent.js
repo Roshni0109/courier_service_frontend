@@ -1,4 +1,4 @@
-import { FormLabel, HStack, Input, VStack } from "@chakra-ui/react";
+import { FormLabel, HStack, Input, Stack, VStack } from "@chakra-ui/react";
 
 export default function HomeComponent({ userDetails, setUserDetails }) {
   function onChangeUserDetails(e) {
@@ -11,11 +11,12 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
       };
     });
   }
+  const inputBreakpoint = { xl: "sm", "2xl": "md" };
 
   return (
     <div>
-      <HStack>
-        <VStack spacing={2}>
+      <Stack direction={{ base: "column", xl: "row" }}>
+        <VStack width={{ base: "100%", xl: "50%" }} spacing={2}>
           <HStack>
             <FormLabel width={"60"} htmlFor="nameOfSender">
               Name of Sender:
@@ -28,6 +29,7 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.nameOfSender}
               id="nameOfSender"
+              size={inputBreakpoint}
             />
           </HStack>
 
@@ -43,6 +45,8 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.phoneOfSender}
               id="phoneOfSender"
+              size={inputBreakpoint}
+              w={"100%"}
             />
           </HStack>
 
@@ -58,6 +62,7 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.stateOfSender}
               id="stateOfSender"
+              size={inputBreakpoint}
             />
           </HStack>
 
@@ -73,6 +78,7 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.cityOfSender}
               id="cityOfSender"
+              size={inputBreakpoint}
             />
           </HStack>
 
@@ -88,6 +94,7 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.addressOfSender}
               id="addressOfSender"
+              size={inputBreakpoint}
             />
           </HStack>
 
@@ -103,11 +110,12 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.pincodeOfSender}
               id="pincodeOfSender"
+              size={inputBreakpoint}
             />
           </HStack>
         </VStack>
 
-        <VStack spacing={2}>
+        <VStack width={{ base: "100%", xl: "50%" }} spacing={2}>
           <HStack>
             <FormLabel width={"60"} htmlFor="nameOfReceiver">
               Name of Receiver:
@@ -120,6 +128,7 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.nameOfReceiver}
               id="nameOfReceiver"
+              size={inputBreakpoint}
             />
           </HStack>
 
@@ -135,6 +144,7 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.phoneOfReceiver}
               id="phoneOfReceiver"
+              size={inputBreakpoint}
             />
           </HStack>
 
@@ -150,6 +160,7 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.stateOfReceiver}
               id="stateOfReceiver"
+              size={inputBreakpoint}
             />
           </HStack>
 
@@ -165,6 +176,7 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.cityOfReceiver}
               id="cityOfReceiver"
+              size={inputBreakpoint}
             />
           </HStack>
 
@@ -180,6 +192,7 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.addressOfReceiver}
               id="addressOfReceiver"
+              size={inputBreakpoint}
             />
           </HStack>
 
@@ -195,12 +208,13 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
               onChange={onChangeUserDetails}
               value={userDetails.pincodeOfReceiver}
               id="pincodeOfReceiver"
+              size={inputBreakpoint}
             />
           </HStack>
         </VStack>
-      </HStack>
+      </Stack>
 
-      <HStack mt={"2"} alignItems={"stretch"}>
+      {/*<HStack mt={"2"} alignItems={"stretch"}>
         <FormLabel width={"40"} htmlFor="additionalDetails">
           Anything else you would like to add:
         </FormLabel>
@@ -212,8 +226,9 @@ export default function HomeComponent({ userDetails, setUserDetails }) {
           onChange={onChangeUserDetails}
           value={userDetails.additionalDetails}
           id="additionalDetails"
+          size={inputBreakpoint}
         />
-      </HStack>
+            </HStack>*/}
     </div>
   );
 }

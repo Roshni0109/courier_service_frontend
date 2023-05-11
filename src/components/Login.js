@@ -3,17 +3,21 @@ import {
   Box,
   Button,
   ButtonGroup,
+  Center,
   Flex,
   FormControl,
   FormLabel,
+  Heading,
   HStack,
   IconButton,
   Input,
   InputGroup,
   InputRightElement,
+  Link,
   Modal,
   ModalContent,
   ModalOverlay,
+  Text,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -28,6 +32,7 @@ export default function Login({
   onCloseLogin,
   isOpenLogin,
   onOpenSignUp,
+  userName,
 }) {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -70,7 +75,7 @@ export default function Login({
           ...res.data,
         };
       });
-
+      userName.current = res.data.nameOfSender;
       /* setPanels({
         home: true,
         login: false,
@@ -95,7 +100,7 @@ export default function Login({
   //console.log(creds);
 
   return (
-    <Modal isOpen={isOpenLogin} isCentered={true}>
+    <Modal size={"sm"} isOpen={isOpenLogin} isCentered={true}>
       <ModalOverlay />
       <ModalContent>
         <Box
@@ -107,74 +112,79 @@ export default function Login({
           borderColor="black"
           borderWidth={"2px"}
         >
+          <Center>
+            <Heading>Login</Heading>
+          </Center>
+          <br />
+          <br />
           <FormControl>
-            <HStack>
-              <VStack width={"50%"}>
-                <Flex alignSelf={"flex-start"}>
-                  <FormLabel htmlFor="email">
-                    Email address/Phone Number
-                  </FormLabel>
-                </Flex>
-                <Flex alignSelf={"flex-start"}>
+            <VStack>
+              <Flex alignSelf={"flex-start"}>
+                <FormLabel htmlFor="email">Email address</FormLabel>
+              </Flex>
+              <Flex alignSelf={"flex-start"}>
+                <Input
+                  width={"80"}
+                  type="email"
+                  borderColor={"black"}
+                  name="email"
+                  id="email"
+                  onChange={onChangeCreds}
+                  value={creds["email"]}
+                />
+              </Flex>
+
+              <Flex alignSelf={"flex-start"}>
+                <FormLabel mt={{ xl: "3", "2xl": "6" }} htmlFor="password">
+                  Password
+                </FormLabel>
+              </Flex>
+
+              <Flex alignSelf={"flex-start"}>
+                <InputGroup width={"80"}>
                   <Input
-                    width={"80"}
-                    type="email"
+                    pr="3.5rem"
+                    type={show ? "text" : "password"}
+                    placeholder="Enter password"
+                    variant="outline"
                     borderColor={"black"}
-                    name="email"
-                    id="email"
+                    width={"80"}
+                    name="password"
                     onChange={onChangeCreds}
-                    value={creds["email"]}
+                    value={creds["password"]}
+                    id="password"
                   />
-                </Flex>
-
-                <Flex alignSelf={"flex-start"}>
-                  <FormLabel mt="6" htmlFor="password">
-                    Password
-                  </FormLabel>
-                </Flex>
-
-                <Flex alignSelf={"flex-start"}>
-                  <InputGroup width={"80"}>
-                    <Input
-                      pr="3.5rem"
-                      type={show ? "text" : "password"}
-                      placeholder="Enter password"
-                      variant="outline"
-                      borderColor={"black"}
-                      width={"80"}
-                      name="password"
-                      onChange={onChangeCreds}
-                      value={creds["password"]}
-                      id="password"
+                  <InputRightElement width="2.5rem">
+                    <IconButton
+                      h="1.75rem"
+                      size="sm"
+                      onClick={handleClick}
+                      icon={show ? <FaEyeSlash /> : <FaEye />}
                     />
-                    <InputRightElement width="2.5rem">
-                      <IconButton
-                        h="1.75rem"
-                        size="sm"
-                        onClick={handleClick}
-                        icon={show ? <FaEyeSlash /> : <FaEye />}
-                      />
-                    </InputRightElement>
-                  </InputGroup>
-                </Flex>
+                  </InputRightElement>
+                </InputGroup>
+              </Flex>
 
-                <br />
-
-                <ButtonGroup p={4} variant="solid" spacing="6" mt={6}>
+              <br />
+              <Center>
+                <ButtonGroup p={4} variant="solid" spacing="6" mt={"3"}>
                   <motion.div whileHover={{ scale: 1.2 }}>
                     <Button onClick={onClickLoginIn} colorScheme={"blue"}>
                       Login
                     </Button>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.2 }}>
-                    <Button onClick={onClickSignUp} colorScheme={"blue"}>
-                      Sign up
-                    </Button>
-                  </motion.div>
                 </ButtonGroup>
-              </VStack>
-            </HStack>
+              </Center>
+            </VStack>
           </FormControl>
+          <Center>
+            <Text>
+              Don`t Have An Account?{" "}
+              <Link color={"blue"} onClick={onClickSignUp}>
+                SignUp
+              </Link>
+            </Text>
+          </Center>
         </Box>
       </ModalContent>
     </Modal>

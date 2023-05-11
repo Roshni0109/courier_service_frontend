@@ -1,6 +1,6 @@
 //import logo from "./logo.svg";
 import "./App.css";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   useDisclosure,
   Tabs,
@@ -11,6 +11,7 @@ import {
   Flex,
   HStack,
   Avatar,
+  Link,
 } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
@@ -21,8 +22,9 @@ import SignUp from "./components/SignUp";
 import TrackShipment from "./components/TrackShipment";
 import History from "./components/History";
 import UpdateProfile from "./components/UpdateProfile";
+//import { Link } from "react-router-dom";
 //import axios from "axios";
-
+//import { useJsApiLoader } from "@react-google-maps/api";
 function App() {
   const {
     isOpen: isOpenLogin,
@@ -52,39 +54,16 @@ function App() {
     addressOfReceiver: "",
     pincodeOfReceiver: "",
 
-    additionalDetails: "",
     orderID: "",
     status: "",
   });
   //console.log(userDetails);
-  const [panels, setPanels] = useState({
-    home: false,
-    login: false,
-    signup: false,
-    trackship: false,
-    prevorder: false,
-    updateprofile: false,
-  });
-
-  function onHandleClick(e) {
-    const name = e.target.name;
-
-    setPanels((prevPanels) => {
-      return {
-        home: false,
-        login: false,
-        signup: false,
-        trackship: false,
-        prevorder: false,
-        updateprofile: false,
-        [name]: !prevPanels[name],
-      };
-    });
-  }
+  const userName = useRef();
   //console.log(panels);
   return (
-    <div>
+    <>
       <Login
+        userName={userName}
         setUserDetails={setUserDetails}
         //setPanels={setPanels}
         isOpenLogin={isOpenLogin}
@@ -96,90 +75,97 @@ function App() {
         isOpenSignUp={isOpenSignUp}
         onCloseSignUp={onCloseSignUp}
         //onOpenSignUp={onOpenSignUp}
+        onOpenLogin={onOpenLogin}
+        userName={userName}
       />
       <Tabs
         variant="soft-rounded"
         align="center"
         colorScheme="red"
         isLazy
-        pt={10}
-        defaultIndex={-1}
+        defaultIndex={0}
+        pt={{ xl: "2", "2xl": "10" }}
       >
-        <Flex width={"100%"} m={0}>
+        <Flex width={"100%"} m={0} pt={0}>
           <Heading
             fontWeight={"extrabold"}
-            bgGradient="linear(to-r,purple.500,purple.700,purple.900)"
+            //bgGradient="linear(to-r,yellow.500,yellow.700,yellow.900)"
+            color={"yellow.200"}
+            fontStyle={"oblique"}
             sx={{ flex: 1 }}
-            bgClip="text"
+            //bgClip="text"
+            size={{ base: "lg", lg: "xl" }}
           >
-            <Flex pl={10}>Online Courier Service</Flex>
+            <Flex pl={10}>Bon Voyage</Flex>
           </Heading>
           <TabList mb={"2"}>
-            <Tab color={"blackAlpha.700"} name="home" onClick={onHandleClick}>
+            <Tab color={"blackAlpha.700"} name="home">
               Home
             </Tab>
 
-            <Tab
-              color={"blackAlpha.700"}
-              name="trackship"
-              onClick={onHandleClick}
-            >
+            <Tab color={"blackAlpha.700"} name="trackship">
               Track Shipment
             </Tab>
-            <Tab
-              color={"blackAlpha.700"}
-              name="prevorder"
-              onClick={onHandleClick}
-            >
+            <Tab color={"blackAlpha.700"} name="prevorder">
               Previous Orders
             </Tab>
-            <Tab
-              color={"blackAlpha.700"}
-              name="updateprofile"
-              onClick={onHandleClick}
-            >
+            <Tab color={"blackAlpha.700"} name="updateprofile">
               Update Profile
             </Tab>
           </TabList>
           <div style={{ flex: 1 }}>
             {" "}
-            {userDetails.email && <Avatar name={userDetails.nameOfSender} />}
+            {userDetails.email && <Avatar name={userName.current} />}
           </div>
         </Flex>
 
         <TabPanels>
-          <TabPanel w={"70rem"} h={"32rem"}>
-            {panels.home && (
-              <Home userDetails={userDetails} setUserDetails={setUserDetails} />
-            )}
+          <TabPanel
+            w={{ base: "32rem", xl: "70rem" }}
+            h={{ xl: "26rem", "2xl": "32rem" }}
+          >
+            {<Home userDetails={userDetails} setUserDetails={setUserDetails} />}
           </TabPanel>
 
-          <TabPanel w={"70rem"} h={"32rem"}>
-            {panels.trackship && <TrackShipment />}
+          <TabPanel
+            w={{ base: "32rem", xl: "70rem" }}
+            h={{ xl: "26rem", "2xl": "32rem" }}
+          >
+            {<TrackShipment />}
           </TabPanel>
-          <TabPanel w={"70rem"} h={"32rem"}>
-            {panels.prevorder && <History userDetails={userDetails} />}
+          <TabPanel
+            w={{ base: "32rem", xl: "70rem" }}
+            h={{ xl: "26rem", "2xl": "32rem" }}
+          >
+            {<History userDetails={userDetails} />}
           </TabPanel>
-          <TabPanel w={"70rem"} h={"32rem"}>
-            {panels.updateprofile && (
+          <TabPanel
+            w={{ base: "32rem", xl: "70rem" }}
+            h={{ xl: "26rem", "2xl": "32rem" }}
+          >
+            {
               <UpdateProfile
                 userDetails={userDetails}
                 setUserDetails={setUserDetails}
               />
-            )}
+            }
           </TabPanel>
         </TabPanels>
       </Tabs>
 
-      <HStack spacing={4} position="absolute" bottom={0} p={10}>
-        <Button leftIcon={<MdEmail />} colorScheme="purple" variant="solid">
-          Email
-        </Button>
-        <Button rightIcon={<MdCall />} colorScheme="purple" variant="outline">
-          Call us
-        </Button>
+      <HStack
+        spacing={4}
+        position="absolute"
+        bottom={0}
+        p={{ xl: "5", "2xl": "10" }}
+      >
+        <Link href="mailto: pg6272695@gmail.com">
+          <Button leftIcon={<MdEmail />} colorScheme="purple" variant="solid">
+            Contact Us
+          </Button>
+        </Link>
       </HStack>
-    </div>
+    </>
   );
 }
 
