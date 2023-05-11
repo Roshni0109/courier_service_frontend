@@ -117,11 +117,7 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
     >
       <FormControl h="100%">
         <Stack spacing={6} direction={{ base: "column", lg: "row" }}>
-          <VStack
-            alignItems={"stretch"}
-            spacing={6}
-            width={{ base: "100%", xl: "50%" }}
-          >
+          <VStack alignItems={"stretch"} spacing={6}>
             <HStack>
               <FormLabel width={80} htmlFor="name">
                 Name:
@@ -158,7 +154,7 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
               <FormLabel width={80} htmlFor="currentpassword">
                 Current Password:
               </FormLabel>
-              <InputGroup p="0" m="0">
+              {/* <InputGroup p="0" m="0">
                 <Input
                   type={showPass ? "text" : "password"}
                   variant="outline"
@@ -178,6 +174,25 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                     icon={showPass ? <FaEyeSlash /> : <FaEye />}
                   />
                 </InputRightElement>
+              </InputGroup> */}
+              <InputGroup p="0" m="0" size={inputBreakpoint}>
+                <Input
+                  pr={"3rem"}
+                  type={showPass ? "text" : "password"}
+                  variant="outline"
+                  borderColor={"black"}
+                  name="currentpassword"
+                  id="currentpassword"
+                  onChange={onChangeIdentity}
+                  value={identity["currentpassword"]}
+                />
+                <InputRightElement height={"100%"} width={"2.5rem"}>
+                  <IconButton
+                    size={{ base: "xs", "2xl": "sm" }}
+                    onClick={handleClickPass}
+                    icon={showPass ? <FaEyeSlash /> : <FaEye />}
+                  />
+                </InputRightElement>
               </InputGroup>
             </HStack>
 
@@ -185,7 +200,7 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
               <FormLabel width={80} htmlFor="password">
                 New Password:
               </FormLabel>
-              <InputGroup size={{ inputBreakpoint }} p="0" m="0">
+              {/* <InputGroup size={{ inputBreakpoint }} p="0" m="0">
                 <Input
                   type={showPass ? "text" : "password"}
                   variant="outline"
@@ -201,6 +216,24 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                   <IconButton
                     h="1.75rem"
                     size="xs"
+                    onClick={handleClickPass}
+                    icon={showPass ? <FaEyeSlash /> : <FaEye />}
+                  />
+                </InputRightElement>
+              </InputGroup> */}
+              <InputGroup p="0" m="0" size={inputBreakpoint}>
+                <Input
+                  type={showPass ? "text" : "password"}
+                  variant="outline"
+                  borderColor={"black"}
+                  name="password"
+                  id="password"
+                  onChange={onChangeIdentity}
+                  value={identity["password"]}
+                />
+                <InputRightElement height={"100%"} width={"2.5rem"}>
+                  <IconButton
+                    size={{ base: "xs", "2xl": "sm" }}
                     onClick={handleClickPass}
                     icon={showPass ? <FaEyeSlash /> : <FaEye />}
                   />
@@ -262,7 +295,7 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
               <FormLabel width={80} htmlFor="confPassword">
                 Confirm New Password:
               </FormLabel>
-              <InputGroup>
+              {/* <InputGroup>
                 <Input
                   type={showConfPass ? "text" : "password"}
                   variant="outline"
@@ -277,6 +310,24 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                 <InputRightElement>
                   <IconButton
                     size="sm"
+                    onClick={handleClickConfPass}
+                    icon={showConfPass ? <FaEyeSlash /> : <FaEye />}
+                  />
+                </InputRightElement>
+              </InputGroup> */}
+              <InputGroup p="0" m="0" size={inputBreakpoint}>
+                <Input
+                  type={showConfPass ? "text" : "password"}
+                  variant="outline"
+                  borderColor={"black"}
+                  name="confpassword"
+                  id="confpassword"
+                  onChange={onChangeIdentity}
+                  value={identity["confpassword"]}
+                />
+                <InputRightElement height={"100%"} width={"2.5rem"}>
+                  <IconButton
+                    size={{ base: "xs", "2xl": "sm" }}
                     onClick={handleClickConfPass}
                     icon={showConfPass ? <FaEyeSlash /> : <FaEye />}
                   />
