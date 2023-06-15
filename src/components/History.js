@@ -132,7 +132,7 @@ export default function History({ userDetails }) {
             </Flex>
 
             <Flex width={"100%"}>
-              <FormLabel fontFamily={"mono"} width={"60"} htmlFor="">
+              <FormLabel width={"60"} htmlFor="">
                 Name of Sender:
               </FormLabel>
               <Text
@@ -148,7 +148,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 Phone Number of Sender:
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.phoneOfSender}
               </Text>
             </Flex>
@@ -157,7 +161,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 State:
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.stateOfSender}
               </Text>
             </Flex>
@@ -166,7 +174,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 City:
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.cityOfSender}
               </Text>
             </Flex>
@@ -175,7 +187,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 From:
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.addressOfSender}
               </Text>
             </Flex>
@@ -184,7 +200,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 Pin code:
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.pincodeOfSender}
               </Text>
             </Flex>
@@ -200,7 +220,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 Status
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.status}
               </Text>
             </Flex>
@@ -208,7 +232,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 Name of Receiver:
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.nameOfReceiver}
               </Text>
             </Flex>
@@ -217,7 +245,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 Phone Number of Receiver:
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.phoneOfReceiver}
               </Text>
             </Flex>
@@ -226,7 +258,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 State:
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.stateOfReceiver}
               </Text>
             </Flex>
@@ -235,7 +271,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 City:
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.cityOfReceiver}
               </Text>
             </Flex>
@@ -246,6 +286,7 @@ export default function History({ userDetails }) {
               </FormLabel>
               <Text
                 //fontStyle={"italic"}
+                textAlign={"left"}
                 size={{ inputBreakpoint }}
                 sx={{ width: "100%" }}
               >
@@ -257,7 +298,11 @@ export default function History({ userDetails }) {
               <FormLabel width={"60"} htmlFor="">
                 Pin code:
               </FormLabel>
-              <Text size={{ inputBreakpoint }} sx={{ width: "100%" }}>
+              <Text
+                textAlign={"left"}
+                size={{ inputBreakpoint }}
+                sx={{ width: "100%" }}
+              >
                 {orderDetail.pincodeOfReceiver}
               </Text>
             </Flex>

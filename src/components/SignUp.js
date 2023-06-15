@@ -148,7 +148,7 @@ export default function SignUp({
           borderWidth={"2px"}
         >
           <FormControl h="100%">
-            <Stack spacing={6} direction={{ base: "column", lg: "row" }}>
+            <Stack spacing={6} direction={{ base: "column", xl: "row" }}>
               <VStack
                 alignItems={"stretch"}
                 spacing={6}
@@ -274,7 +274,7 @@ export default function SignUp({
                   <FormLabel width={80} htmlFor="confPassword">
                     Confirm Password:
                   </FormLabel>
-                  <InputGroup>
+                  {/* <InputGroup>
                     <Input
                       type={showConfPass ? "text" : "password"}
                       variant="outline"
@@ -288,6 +288,24 @@ export default function SignUp({
                     <InputRightElement>
                       <IconButton
                         size="sm"
+                        onClick={handleClickConfPass}
+                        icon={showConfPass ? <FaEyeSlash /> : <FaEye />}
+                      />
+                    </InputRightElement>
+                  </InputGroup> */}
+                  <InputGroup p="0" m="0" size={inputBreakpoint}>
+                    <Input
+                      type={showConfPass ? "text" : "password"}
+                      variant="outline"
+                      borderColor={"black"}
+                      name="confPassword"
+                      id="confPassword"
+                      onChange={onChangeIdentity}
+                      value={identity["confPassword"]}
+                    />
+                    <InputRightElement height={"100%"} width={"2.5rem"}>
+                      <IconButton
+                        size={{ base: "xs", "2xl": "sm" }}
                         onClick={handleClickConfPass}
                         icon={showConfPass ? <FaEyeSlash /> : <FaEye />}
                       />

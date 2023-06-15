@@ -20,6 +20,7 @@ import { motion } from "framer-motion";
 
 export default function UpdateProfile({ setUserDetails, userDetails }) {
   const [showPass, setShowPass] = useState(false);
+  const [showNewPass, setShowNewPass] = useState(false);
   const [showConfPass, setShowConfPass] = useState(false);
   const [credentials, setCredentials] = useState({
     nameOfSender: userDetails.nameOfSender,
@@ -38,6 +39,7 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
 
   const handleClickPass = () => setShowPass(!showPass);
   const handleClickConfPass = () => setShowConfPass(!showConfPass);
+  const handleClickNewPass = () => setShowNewPass(!showNewPass);
   const toast = useToast();
   const inputBreakpoint = { xl: "sm", "2xl": "md" };
 
@@ -116,7 +118,7 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
       borderWidth={"2px"}
     >
       <FormControl h="100%">
-        <Stack spacing={6} direction={{ base: "column", lg: "row" }}>
+        <Stack spacing={6} direction={{ base: "column", xl: "row" }}>
           <VStack alignItems={"stretch"} spacing={6}>
             <HStack>
               <FormLabel width={80} htmlFor="name">
@@ -223,7 +225,7 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
               </InputGroup> */}
               <InputGroup p="0" m="0" size={inputBreakpoint}>
                 <Input
-                  type={showPass ? "text" : "password"}
+                  type={showNewPass ? "text" : "password"}
                   variant="outline"
                   borderColor={"black"}
                   name="password"
@@ -234,8 +236,8 @@ export default function UpdateProfile({ setUserDetails, userDetails }) {
                 <InputRightElement height={"100%"} width={"2.5rem"}>
                   <IconButton
                     size={{ base: "xs", "2xl": "sm" }}
-                    onClick={handleClickPass}
-                    icon={showPass ? <FaEyeSlash /> : <FaEye />}
+                    onClick={handleClickNewPass}
+                    icon={showNewPass ? <FaEyeSlash /> : <FaEye />}
                   />
                 </InputRightElement>
               </InputGroup>
